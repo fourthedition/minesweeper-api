@@ -28,5 +28,17 @@ export class User extends Model<User> {
   })
   elorank: number;
 
+  @Default(0)
+  @Column({
+    type: DataType.INTEGER,
+  })
+  win: number;
+
+  @Default(0)
+  @Column({
+    type: DataType.INTEGER,
+  })
+  lose: number;
+
 
 }

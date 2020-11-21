@@ -18,7 +18,7 @@ export class CreateUserDto {
   @ApiProperty()
   @IsOptional()
   elorank: number;
-
+  
   @ApiProperty()
   @IsOptional()
   facebookId: string;

@@ -6,8 +6,7 @@ import {CreateUserDto} from '../dto/createUser'
 export class UserService {
   constructor(@Inject('User_REPOSITORY') private UserRepository: typeof User) {}
 
-  async allUsers(): Promise<User[]> {
-    
+  async allUsers(): Promise<User[]> {  
     const user = this.UserRepository.findAll<User>();
     return user;
   }
@@ -81,14 +80,30 @@ export class UserService {
 
     // player1
     const point1 = k * (score1 - expectedScore1)
+    let win1 = player1.win
+    let lose1 = player1.lose
+    if (score1){
+      win1 = win1 + 1
+    }
+    else{
+      lose1 = lose1 + 1
+    }
     console.log("Player 1 : " + point1)
     const newPlayer1:any = (player1.elorank+point1)
-    player1.update({elorank: Math.max(0, newPlayer1.toFixed(0))})
+    player1.update({elorank: Math.max(0, newPlayer1.toFixed(0)), win: win1, lose: lose1})
     // player2
     const point2 = k * (score2 - expectedScore2)
+    let win2 = player1.win
+    let lose2 = player1.lose
+    if (score2){
+      win2 = win2 + 1
+    }
+    else{
+      lose2 = lose2 + 1
+    }
     console.log("Player 2 : " + point2)
     const newPlayer2:any = (player2.elorank+point2)
-    player2.update({elorank: Math.max(0 , newPlayer2.toFixed(0))})
+    player2.update({elorank: Math.max(0 , newPlayer2.toFixed(0)), win: win2, lose: lose2})
     return [player1, player2]
   }
   
