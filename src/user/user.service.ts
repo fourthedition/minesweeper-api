@@ -60,7 +60,7 @@ export class UserService {
     const leaderboard = await this.UserRepository.findAll<User>({
       order: [['elorank', 'DESC']]
     })
-    return leaderboard
+    return leaderboard.slice(0,10)
   }
 
   async getUserById(id: any): Promise<any> {
@@ -82,7 +82,8 @@ export class UserService {
     const point1 = k * (score1 - expectedScore1)
     let win1 = player1.win
     let lose1 = player1.lose
-    if (score1){
+    console.log(typeof(Number(score1)))
+    if (score1 == '1') {
       win1 = win1 + 1
     }
     else{
@@ -93,9 +94,10 @@ export class UserService {
     player1.update({elorank: Math.max(0, newPlayer1.toFixed(0)), win: win1, lose: lose1})
     // player2
     const point2 = k * (score2 - expectedScore2)
-    let win2 = player1.win
-    let lose2 = player1.lose
-    if (score2){
+    let win2 = player2.win
+    let lose2 = player2.lose
+    console.log(score2, Number(score2),typeof(Number(score2)))
+    if (score2 == '1'){
       win2 = win2 + 1
     }
     else{
